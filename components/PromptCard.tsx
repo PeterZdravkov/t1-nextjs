@@ -25,7 +25,12 @@ const PromptCard = ({
   return (
     <div className="prompt_card">
       <div className="flex justify-between items-start gap-5">
-        <div className="flex-1 flex justify-start items-center gap-3 cursor-pointer">
+        <div
+          className="flex-1 flex justify-start items-center gap-3 cursor-pointer"
+          onClick={() => {
+            router.push(`/profile/${post.creator._id}`);
+          }}
+        >
           <Image
             src={post.creator.image}
             alt="user image"
@@ -70,22 +75,23 @@ const PromptCard = ({
         {post.tag}
       </p>
 
-      {session?.user.id === post.creator._id && pathName === "/profile" && (
-        <div className="mt-5 flex-center gap-4 border-t border-gray-300 pt-3">
-          <p
-            className="font-inter text-sm green_gradient cursor-pointer"
-            onClick={handleEdit}
-          >
-            Edit
-          </p>
-          <p
-            className="font-inter text-sm orange_gradient cursor-pointer"
-            onClick={handleDelete}
-          >
-            Delete
-          </p>
-        </div>
-      )}
+      {session?.user.id === post.creator._id &&
+        pathName === `/profile/${session?.user.id}` && (
+          <div className="mt-5 flex-center gap-4 border-t border-gray-300 pt-3">
+            <p
+              className="font-inter text-sm green_gradient cursor-pointer"
+              onClick={handleEdit}
+            >
+              Edit
+            </p>
+            <p
+              className="font-inter text-sm orange_gradient cursor-pointer"
+              onClick={handleDelete}
+            >
+              Delete
+            </p>
+          </div>
+        )}
     </div>
   );
 };

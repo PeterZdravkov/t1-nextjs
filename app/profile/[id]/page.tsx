@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 import Profile from "@/components/Profile";
 
-const UserProfile = () => {
+const UserProfile = ({ params }: { params: { id: string } }) => {
   const { data: session }: any = useSession();
   const [posts, setPosts] = useState([]);
   const router = useRouter();
@@ -34,13 +34,14 @@ const UserProfile = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await fetch(`/api/users/${session?.user!.id}/posts`);
+      const response = await fetch(
+        `/api/users/${/*session?.user!.id*/ params.id}/posts`
+      );
       const data = await response.json();
-
       setPosts(data);
     };
-    if (session?.user!.id) fetchPosts();
-  }, [session?.user]);
+    fetchPosts();
+  }, [params.id]);
 
   return (
     <Profile

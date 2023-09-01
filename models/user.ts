@@ -17,9 +17,6 @@ const UserSchema = new Schema({
   image: {
     type: String,
   },
-  test: {
-    type: String,
-  },
 });
 
 const User = models.User || model("User", UserSchema);

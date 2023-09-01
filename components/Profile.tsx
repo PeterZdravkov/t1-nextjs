@@ -1,10 +1,18 @@
 import PromptCard from "./PromptCard";
+import { useSession } from "next-auth/react";
 
 const Profile = ({ name, desc, data, handleEdit, handleDelete }: any) => {
+  const { data: session } = useSession();
+
+  const userName =
+    data[0]?.creator._id === (session?.user! as any).id
+      ? "My"
+      : data[0]?.creator.username + `'s`;
+
   return (
     <section className="w-full">
       <h1 className="head_text text-left">
-        <span className="blue_gradient">{name} Profile</span>
+        <span className="blue_gradient">{userName} Profile</span>
       </h1>
       <p className="desc text-left">{desc}</p>
       <div className="mt-10 prompt_layout">
