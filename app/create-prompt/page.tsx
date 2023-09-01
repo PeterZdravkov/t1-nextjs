@@ -14,7 +14,7 @@ const CreatePrompt = () => {
   });
 
   const router = useRouter();
-  const {data: session}: any = useSession();
+  const { data: session }: any = useSession();
 
   const createPrompt = async (e: Event) => {
     e.preventDefault();
@@ -23,8 +23,11 @@ const CreatePrompt = () => {
     try {
       const response = await fetch("/api/prompt/new", {
         method: "POST",
-        userId: session?.user.id,
-        body: JSON.stringify({ prompt: post.prompt, tag: post.tag }),
+        body: JSON.stringify({
+          prompt: post.prompt,
+          tag: post.tag,
+          userId: session?.user.id,
+        }),
       } as any);
 
       if (response.ok) {

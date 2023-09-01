@@ -9,10 +9,10 @@ export default function Home() {
       <h1 className="head_text text-center">
         Discover and Share 
         <br className="max-md:hidden"/>
-        <span className="orange_gradient text-center"> AI-Powered Prompts</span>
+        <span className="orange_gradient text-center"> Prompts</span>
       </h1>
       <p className=" desc text-center">
-        Promptopia is an open-source AI prompting tool for modern world to discover, create and share creative prompts
+        Extremely simple website for creating, editing and deleting small prompts to practice app routing, api and next auth, mongoDB
       </p>
       <Feed />
     </section>
