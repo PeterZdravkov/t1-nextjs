@@ -26,7 +26,7 @@ const PromptCardList = ({ data, handleTagClick, searchText }: any) => {
 const Feed = () => {
   const [searchText, setSearchText] = useState("");
   const [posts, setPosts] = useState([]);
-  const [retryFetch, setRetryFetch] = useState(true);
+  const [retryFetch, setRetryFetch] = useState(false);
 
   const handleSearchChange: any = (e: Event) => {
     e.preventDefault();
