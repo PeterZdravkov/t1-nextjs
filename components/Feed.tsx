@@ -38,8 +38,10 @@ const Feed = () => {
       const response = await fetch("/api/prompt");
       const data = await response.json();
 
+      console.log('FETCHING PROMPTS')
+
       if (data.status === 500) {
-        setRetryFetch((current) => !current);
+        setRetryFetch(true);
         console.log("Retrying fetch");
         return;
       }
@@ -70,6 +72,21 @@ const Feed = () => {
           Clear
         </button>
       </form>
+
+      {retryFetch && (
+        <div className="flex flex-col gap-4 mt-10 items-center">
+          <div>There was an error loading the feed</div>
+          <button
+            type="button"
+            onClick={() => {
+              setTimeout(() => setRetryFetch(false), 3000);
+            }}
+            className="outline-1 outline outline-black text-red-600 rounded-full w-16 text-sm focus:outline-red-600"
+          >
+            {"Retry"}
+          </button>
+        </div>
+      )}
 
       <PromptCardList
         data={posts}
