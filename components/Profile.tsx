@@ -5,7 +5,7 @@ const Profile = ({ name, desc, data, handleEdit, handleDelete }: any) => {
   const { data: session } = useSession();
 
   const userName =
-    data[0]?.creator._id === (session?.user! as any).id
+    data[0]?.creator._id === (session?.user! as any)?.id
       ? "My"
       : data[0]?.creator.username + `'s`;
 
