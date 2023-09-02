@@ -26,6 +26,7 @@ const PromptCardList = ({ data, handleTagClick, searchText }: any) => {
 const Feed = () => {
   const [searchText, setSearchText] = useState("");
   const [posts, setPosts] = useState([]);
+  const [retryFetch, setRetryFetch] = useState(true);
 
   const handleSearchChange: any = (e: Event) => {
     e.preventDefault();
@@ -37,10 +38,16 @@ const Feed = () => {
       const response = await fetch("/api/prompt");
       const data = await response.json();
 
+      if (data.status === 500) {
+        setRetryFetch((current) => !current);
+        console.log("Retrying fetch");
+        return;
+      }
+
       setPosts(data);
     };
     fetchPosts();
-  }, []);
+  }, [retryFetch]);
 
   return (
     <section className="feed">
