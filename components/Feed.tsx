@@ -38,18 +38,24 @@ const Feed = () => {
       const response = await fetch("/api/prompt");
       const data = await response.json();
 
-      console.log('FETCHING PROMPTS')
+      console.log("FETCHING PROMPTS");
 
-      if (data.status === 500) {
-        setRetryFetch(true);
-        console.log("Retrying fetch");
-        return;
-      }
+      // if (data.status === 500) {
+      //   setRetryFetch(true);
+      //   console.log("Retrying fetch");
+      //   return;
+      // }
 
       setPosts(data);
     };
-    fetchPosts();
-  }, [retryFetch]);
+
+    try {
+      fetchPosts();
+    } catch (error) {
+      console.log(error);
+      fetchPosts();
+    }
+  }, []);
 
   return (
     <section className="feed">
@@ -64,7 +70,7 @@ const Feed = () => {
         />
         <button
           type="button"
-          className="outline_btn mx-6 bg-red-300"
+          className="outline_btn  bg-red-300 mx-6"
           onClick={() => {
             setSearchText("");
           }}
@@ -73,7 +79,7 @@ const Feed = () => {
         </button>
       </form>
 
-      {retryFetch && (
+      {/* {retryFetch && (
         <div className="flex flex-col gap-4 mt-10 items-center">
           <div>There was an error loading the feed</div>
           <button
@@ -86,7 +92,7 @@ const Feed = () => {
             {"Retry"}
           </button>
         </div>
-      )}
+      )} */}
 
       <PromptCardList
         data={posts}
